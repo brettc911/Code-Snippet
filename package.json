@@ -1,0 +1,28 @@
+{
+  "name": "code_snippet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "express-flash-messages": "^0.1.1",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.5",
+    "handlebars": "^4.0.10",
+    "highlight": "^0.2.4",
+    "highlight.js": "^9.12.0",
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.11.6",
+    "mongoose-findorcreate": "^2.0.0",
+    "mustache-express": "^1.2.5",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "rainbow-code": "^2.1.2"
+  }
+}
