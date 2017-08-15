@@ -1,69 +1,67 @@
 
 // ===== PACKAGES ===== //
+// -------------------- //
 const express = require('express');
-const routes = express.Router();
-const User = require('../models/user');
+const User = require('../models/users');
 const flash = require('express-flash-messages');
 const bodyParser = require('body-parser');
+const routes = express.Router();
+
 
 // ===== PASSPORT ===== //
+// -------------------- //
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
-// --- Connect Passport to express
+// *** Connect Passport to express
 routes.use(passport.initialize());
 routes.use(passport.session());
 routes.use(flash());
 
-// --- Passport config
+
+// *** Passport config
+//_______________________________________________________
 passport.use(
-  new LocalStrategy(function(email, password, done) {
-    // console.log('LocalStrategy', email, password);
-    User.authenticate(email, password)
+  new LocalStrategy(function(username, password, done) {
+    // console.log('LocalStrategy', username, password);
+    User.authenticate(username, password)
       // Success!
       .then(user => {
         if (user) {
           done(null, user);
         } else {
-          done(null, null, { message: 'There was no user with this email and password.' });
+          done(null, null, { message: 'There was no user with this username and password.' });
         }
       })
       // Error!
       .catch(err => done(err));
   })
 );
-
-// // Local login
-// routes.get("/sighnin", function(req, res) {
-//   res.render('login', { failed: req.query.failed })
-// })
-//
-// routes.get("/sighnup", function(req, res) {
-//   res.send('sighn up please', { failed: req.query.failed })
-// })
+//_______________________________________________________
 
 
-// --- Store userid in session
+// *** Store userid in session
 passport.serializeUser((user, done) => {
   done(null, user._id);
 });
 
-// -- Get user form session via ID
+// *** Get user form session via ID
 passport.deserializeUser((id, done) => {
   User.findById(id).then(user => done(null, user));
 });
 
 
 // ===== REGISTER NEW USER ===== //
+
 routes.get('/signup', (req, res) => {
   res.render('signup');
 });
 
-// -- Submit Registration
+// *** Submit Registration
 routes.post('/register', (req, res) => {
   let user = new User(req.body);
   user.provider = 'local';
-  user.setPassword(req.body.pwd);
+  user.setPassword(req.body.password);
 
   user
     .save()
@@ -73,20 +71,26 @@ routes.post('/register', (req, res) => {
 
 // ===== LOGIN ===== //
 
-// Login Form
+// *** Login Form
 routes.get('/login', (req, res) => {
-  //console.log('errors:', res.locals.getMessages());
+  console.log('errors:', res.locals.getMessages());
   res.render('login', { failed: req.query.failed });
 });
 
-// Login Submission
-routes.post('/login',
+// *** Login Submission
+routes.post('/auth',
   passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/login?failed=true',
+    failureRedirect: '/account/login?failed=true',
     failureFlash: true
   })
 );
+
+// *** Logout User
+routes.get('/logout', (req, res) => {
+  req.logout()
+  res.redirect('/account/login')
+})
 
 
 module.exports = routes;

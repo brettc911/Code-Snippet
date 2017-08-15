@@ -3,21 +3,35 @@
   <head>
     <meta charset="utf-8">
     <title>Home</title>
+    <link rel="stylesheet" href="/css/meyers_reset.css">
     <link rel="stylesheet" href="/css/hallows.css">
     <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
+    <section class="wrapper">
+
     <header>
-      <!-- Menu options go here -->
+      <a href="/"><h1 class="logo">Snippin</h1></a>
+      <h1>Welcome, {{firstName}}</h1>
+      <ul>
+        <a href="/"><li>Home</li></a>
+        <a href="/snippet/create"><li>Create Snip</li></a>
+        <a href="/"><li>Profile</li></a>
+        <a href="/account/login"><li>Login</li></a>
+        <a href="/account/logout"><li>Logout</li></a>
+      </ul>
     </header>
 
-    <h1>Login</h1>
-    <h1>Create Account</h1>
+    <section class="home-main-content">
+      <form class="form" action="index.html" method="post">
+        <h1>Find some code:</h1>
+        <input type="text" name="tag-search" value="" placeholder="Search by tag name">
+        <button>Get Snippin!</button>
+      </form>
+    </section>
 
-    <textarea name="name" rows="8" cols="80"></textarea>
-
-      <pre><code data-language="javascript">var foo = 2*3</code></pre>
-
-    <script src="/js/rainbow-custom.min.js">Rainbow.color()</script>
+      <!-- <pre><code data-language="javascript" contenteditable="true">var foo = 2 + 3</code></pre> -->
+    </section>
+    <script src="/js/rainbow.custom.min.js"></script>
   </body>
 </html>

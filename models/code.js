@@ -5,14 +5,16 @@ const findOrCreate = require('mongoose-findorcreate');
 // get a reference to Schema
 const Schema = mongoose.Schema;
 
-// create a schema for a user
-const codSchema = new Code({
-  codeSnippet: { type: String,
-});
+// create a schema for some code
+const codeSchema = new Schema({
+  title: { type: String, requried: true},
+  tags: { type: String},
+  codeSnippet: { type: String}
+})
 
-userSchema.plugin(findOrCreate);
+codeSchema.plugin(findOrCreate);
 
-// create a model for a User
-const Code = mongoose.model('Code', codeSchema);
+// create a model for some code
+const Code = mongoose.model('code', codeSchema);
 
 module.exports = Code;

@@ -2,15 +2,36 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/meyers_reset.css">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Login</title>
   </head>
   <body>
-    <h1>Log in:</h1>
-    <form class="loginForm" action="/account/login" method="post">
-      <input type="text" name="uid" value="" placeholder="username">
-      <input type="password" name="pwd" value="" placeholder="password">
-      <button>Sign Up!</button>
+    <section class="wrapper">
+
+    <header>
+      <a href="/"><h1 class="logo">Snippin</h1></a>
+      <ul>
+        <a href="/"><li>Home</li></a>
+        <a href="/snippet/create"><li>Create Snip</li></a>
+        <a href="/"><li>Profile</li></a>
+        <a href="/account/login"><li>Login</li></a>
+        <a href="/account/logout"><li>Logout</li></a>
+      </ul>
+    </header>
+
+    <form class="form" id="loginForm" action="/account/auth" method="post">
+      <h1>login</h1>
+      <input type="text" name="username" value="" placeholder="username">
+      <input type="password" name="password" value="" placeholder="password">
+      <button>Submit</button>
+      <div class="">
+        <p>Forgot Password?</p>
+        <a href="/account/signup"><p>Create Account</p></a>
+      </div>
     </form>
 
+
+    </section>
   </body>
 </html>
