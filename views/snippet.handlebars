@@ -11,6 +11,8 @@
 
     <header>
       <a href="/"><h1 class="logo">Snippin</h1></a>
+      {{#name}}<h1>Welcome, {{.}}</h1>{{/name}}
+
       <ul>
         <a href="/"><li>Home</li></a>
         <a href="/"><li>Create Snip</li></a>
@@ -20,29 +22,17 @@
       </ul>
     </header>
 
-    <!-- <form class="snippetForm" action="/snippet/submit" method="post">
-      <h1>Start Snippin!</h1>
-      <input type="text" name="title" value="" placeholder="title">
-      <input type="text" name="tags" value="" placeholder="tags">
-      <input type="text" name="code" value="" placeholder="Start coding!">
-
-      <button>Submit</button>
-    </form> -->
-
     <section class="snippet-main">
-      <form class="form" id="snippetForm" action="index.html" method="post">
+      <form class="form" id="snippetForm" action="/snippet/submit" method="post">
         <h1>Start Snippin!</h1>
-        <input type="text" name="" value="" placeholder="title">
-        <input type="text" name="" value="" placeholder="tags">
-        <div id="editor">
-          Start coding!
+        <input type="text" name="title" value="" placeholder="title">
+        <input type="text" name="tags" value="" placeholder="tags">
+        <input class="snippet" type="text" name="codeSnippet" value="">
+        <div id="editor">Start coding!
         </div>
+        <button>Submit</button>
       </form>
     </section>
-
-
-
-
 
 
     </section>
@@ -56,6 +46,10 @@
         enableBasicAutocompletion: true,
         enableSnippets: true,
         enableLiveAutocompletion: false
+    });
+    editor.getSession().on('change', function(e) {
+      var code = editor.getValue();
+      document.querySelector('.snippet').value = code
     });
   </script>
   </body>

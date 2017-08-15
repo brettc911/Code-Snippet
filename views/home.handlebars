@@ -12,7 +12,7 @@
 
     <header>
       <a href="/"><h1 class="logo">Snippin</h1></a>
-      <h1>Welcome, {{firstName}}</h1>
+      {{#name}}<h1>Welcome, {{.}}</h1>{{/name}}
       <ul>
         <a href="/"><li>Home</li></a>
         <a href="/snippet/create"><li>Create Snip</li></a>
@@ -23,15 +23,43 @@
     </header>
 
     <section class="home-main-content">
-      <form class="form" action="index.html" method="post">
+      <form class="form" action="/search" method="get">
         <h1>Find some code:</h1>
-        <input type="text" name="tag-search" value="" placeholder="Search by tag name">
+        <input type="text" name="search" value="" placeholder="Search by tag name">
         <button>Get Snippin!</button>
       </form>
+
+      <div class="search-results">
+        {{#code}}
+          <div class="single-result">
+            <h2>{{title}}</h2>
+            <h2>{{tags}}</h2>
+            <div id="editor">{{codeSnippet}}</div>
+          </div>
+        {{/code}}
+      </div>
     </section>
 
-      <!-- <pre><code data-language="javascript" contenteditable="true">var foo = 2 + 3</code></pre> -->
+
     </section>
-    <script src="/js/rainbow.custom.min.js"></script>
+    <script src="/js/ace-builds-master/src-noconflict/ace.js" charset="utf-8"></script>
+    <script src="../src-noconflict/ext-language_tools.js"></script>
+    <script>
+
+      var editor = ace.edit("editor");
+      // var beautify = ace.require("ace/ext/beautify");
+      // beautify.beautify(editor.session);
+      editor.setTheme("ace/theme/monokai");
+      editor.getSession().setMode("ace/mode/javascript");
+      editor.setOptions({
+          enableBasicAutocompletion: true,
+          enableSnippets: true,
+          enableLiveAutocompletion: false
+      });
+      editor.getSession().on('change', function(e) {
+        var code = editor.getValue();
+        document.querySelector('.snippet').value = code
+      });
+    </script>
   </body>
 </html>

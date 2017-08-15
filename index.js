@@ -13,7 +13,7 @@ const highlight = require('highlight.js');
 
 // ===== MODLES ===== //
 // ------------------ //
-const users = require('./models/users');
+const User = require('./models/users');
 
 // ===== ROUTES ===== //
 // ------------------ //
@@ -21,6 +21,41 @@ const homeRoute = require('./routes/home');
 const accountRoute = require('./routes/account');
 const snippetRoute = require('./routes/snippet');
 
+// ===== PASSPORT ===== //
+// -------------------- //
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+
+
+// *** Passport config
+//_______________________________________________________
+passport.use(
+  new LocalStrategy(function(username, password, done) {
+    // console.log('LocalStrategy', username, password);
+    User.authenticate(username, password)
+      // Success!
+      .then(user => {
+        if (user) {
+          done(null, user);
+        } else {
+          done(null, null, { message: 'There was no user with this username and password.' });
+        }
+      })
+      // Error!
+      .catch(err => done(err));
+  })
+);
+
+// *** Store userid in session
+passport.serializeUser((user, done) => {
+  done(null, user._id);
+});
+
+// *** Get user form session via ID
+passport.deserializeUser((id, done) => {
+  User.findById(id).then(user => done(null, user));
+});
+//_______________________________________________________
 
 
 // ===== APP CONFIG ===== //
@@ -40,6 +75,12 @@ app.use(
     saveUninitialized: true
   })
 );
+
+// *** Connect Passport to express
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
 
 // *** Body Parser
 app.use(bodyParser.json());

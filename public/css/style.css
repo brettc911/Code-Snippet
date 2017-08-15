@@ -20,7 +20,7 @@ h1{
 .wrapper{
   margin: 0 auto;
   background-color: rgb(40, 42, 54);
-  height: 100vh;
+  min-height: 100vh;
 }
 
 /*=================== HEADER ======================*/
@@ -56,9 +56,9 @@ header > ul > a{
   font-family: 'Lobster';
 }
 
-header > ul > a.current:link{
-  border-bottom: solid 2px orange;
-}
+
+
+
 
 /*=================== HOMEPAGE ======================*/
 
@@ -118,6 +118,26 @@ header > ul > a.current:link{
   border: 1px solid white;
 }
 
+/*------ SEARCH RESULTS --------*/
+.search-results{
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.single-result{
+  width: 40%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.single-result #editor{
+  width: 100%;
+}
+
 
 /*=================== LOGIN PAGE ======================*/
 
@@ -151,6 +171,11 @@ header > ul > a.current:link{
   height: 50%;
 }
 
+#snippetForm button{
+  margin-bottom: 20px;
+
+}
+
 
 /*=================== SNIPPET PAGE ======================*/
 .snippet-main{
@@ -173,6 +198,11 @@ header > ul > a.current:link{
   font-size: 10px;
   height: 250px;
   width: 150%;
-  margin-bottom: 20px;
+
   border: solid 1px orange;
+}
+
+
+.snippet{
+  display: none;
 }

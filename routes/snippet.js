@@ -7,8 +7,12 @@ const Code = require('../models/code');
 
 
 routes.get("/create", (req, res) => {
-
-  res.render('snippet')
+  if (req.user) {
+    name = req.user.firstName
+    res.render('snippet', {name: name})
+  } else {
+    res.render('snippet')
+  }
 })
 
 routes.post("/submit", (req, res) => {
@@ -17,7 +21,7 @@ routes.post("/submit", (req, res) => {
 
   code
     .save()
-    .then(() => res.redirect('/'))
+    .then(() => res.redirect('/snippet/create'))
     .catch(err => console.log(err));
 });
 
