@@ -19,13 +19,13 @@ h1{
 
 .wrapper{
   margin: 0 auto;
-  background-color: rgb(40, 42, 54);
+  background: rgb(40, 42, 54);
   min-height: 100vh;
 }
 
 /*=================== HEADER ======================*/
 header{
-  height: 11%;
+  height: 11vh;
   padding: 0 20px;
   background-color: white;
   align-items: center;
@@ -82,6 +82,7 @@ header > ul > a{
 .form > h1{
   font-size: 40px;
   color: orange;
+  margin-bottom: 10px;
 }
 
 .form > h1::before{
@@ -100,6 +101,7 @@ header > ul > a{
   border: none;
   background-color: rgb(40, 42, 54);
   font-size: 20px;
+  margin: 10px 0;
 }
 
 .form > input:focus{
@@ -107,6 +109,7 @@ header > ul > a{
 }
 
 .form > button{
+  margin: 10px 0;
   width: 85px;
   color: white;
   font-family: 'Lobster';
@@ -123,10 +126,12 @@ header > ul > a{
   width: 100%;
   display: flex;
   flex-flow: row wrap;
+  justify-content: center;
 }
 
 .single-result{
-  width: 40%;
+  width: 20%;
+  margin: 20px;
   height: 300px;
   display: flex;
   flex-direction: column;
@@ -136,6 +141,12 @@ header > ul > a{
 
 .single-result #editor{
   width: 100%;
+}
+
+.single-result h2{
+  color: white;
+  font-family: 'Lobster';
+
 }
 
 
@@ -158,6 +169,7 @@ header > ul > a{
 }
 
 #loginForm div{
+  margin-top: 10px;
   width: 20%;
   display: flex;
   flex-direction: row;
@@ -196,7 +208,7 @@ header > ul > a{
 
 #editor{
   font-size: 10px;
-  height: 250px;
+  height: 230px;
   width: 150%;
 
   border: solid 1px orange;

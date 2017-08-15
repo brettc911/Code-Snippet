@@ -47,14 +47,15 @@
     <script>
 
       var editor = ace.edit("editor");
-      // var beautify = ace.require("ace/ext/beautify");
-      // beautify.beautify(editor.session);
+      var beautify = ace.require("ace/ext/beautify");
       editor.setTheme("ace/theme/monokai");
       editor.getSession().setMode("ace/mode/javascript");
+      beautify.beautify(editor.session);
+
       editor.setOptions({
           enableBasicAutocompletion: true,
           enableSnippets: true,
-          enableLiveAutocompletion: false
+          enableLiveAutocompletion: false,
       });
       editor.getSession().on('change', function(e) {
         var code = editor.getValue();
