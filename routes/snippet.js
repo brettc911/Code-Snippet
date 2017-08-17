@@ -1,7 +1,11 @@
 const express = require('express');
 const routes = express.Router();
-const rainbow = require('rainbow-code');
+const passport = require('passport');
+const User = require('../models/users');
 const Code = require('../models/code');
+const flash = require('express-flash-messages');
+const bodyParser = require('body-parser');
+
 
 
 
@@ -11,18 +15,27 @@ routes.get("/create", (req, res) => {
     name = req.user.firstName
     res.render('snippet', {name: name})
   } else {
-    res.render('snippet')
+    res.render('snippet', {error: 'Must be logged in to create snippets'})
   }
 })
 
 routes.post("/submit", (req, res) => {
-  let code = new Code(req.body);
-  code.provider = 'local';
+  if (req.user) {
+    req.body.author = req.user.username
 
-  code
-    .save()
-    .then(() => res.redirect('/snippet/create'))
-    .catch(err => console.log(err));
+
+    let code = new Code(req.body);
+    code.provider = 'local';
+    code
+      .save()
+      .then(() => res.redirect('/snippet/create'))
+      .catch(err => console.log(err));
+  } else {
+    res.redirect('/snippet/create')
+  }
+
+
+
 });
 
 

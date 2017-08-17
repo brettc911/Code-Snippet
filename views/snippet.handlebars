@@ -15,8 +15,8 @@
 
       <ul>
         <a href="/"><li>Home</li></a>
-        <a href="/"><li>Create Snip</li></a>
-        <a href="/"><li>Profile</li></a>
+        <a href="/snippet/create"><li>Create Snip</li></a>
+        <a href="/account/profile"><li>Profile</li></a>
         <a href="/account/login"><li>Login</li></a>
         <a href="/account/logout"><li>Logout</li></a>
       </ul>
@@ -25,9 +25,11 @@
     <section class="snippet-main">
       <form class="form" id="snippetForm" action="/snippet/submit" method="post">
         <h1>Start Snippin!</h1>
+        <span class="error">{{error}}</span>
         <input type="text" name="title" value="" placeholder="title">
         <input type="text" name="tags" value="" placeholder="tags">
         <input class="snippet" type="text" name="codeSnippet" value="">
+        <input class="snippet" type="text" name="author" value="">
         <div id="editor">Start coding!
         </div>
         <button>Submit</button>
@@ -36,8 +38,8 @@
 
 
     </section>
-  <script src="/js/ace-builds-master/src-noconflict/ace.js" charset="utf-8"></script>
-  <script src="../src-noconflict/ext-language_tools.js"></script>
+  <script src="/js/ace-builds-master/src-noconflict/ace.js"></script>
+  <script src="/js/ace-builds-master/src-noconflict/ext-language_tools.js"></script>
   <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");

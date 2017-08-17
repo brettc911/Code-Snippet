@@ -51,4 +51,35 @@ routes.get('/logout', (req, res) => {
 })
 
 
+// ===== PROFILE ===== //
+
+//*** Main Profile
+routes.get('/profile', (req, res) => {
+  if (req.user) {
+    user = req.user
+    name = req.user.firstName
+    res.render('profile', {user: user, name: name})
+  } else {
+    res.send('create a profile fail message...somehow')
+  }
+})
+// *** Update Profile Information
+routes.post('/profile/update', (req, res) => {
+  User.findById(req.user.id)
+  .then(user => {
+    user.firstName = req.body.firstName || user.firstName
+    user.lastName = req.body.lastName || user.lastName
+    user.username = req.body.username || ser.username
+    user.email = req.body.email || user.email
+    user.setPassword(req.body.password)
+    user
+      .save()
+      .then(() => res.redirect('/'))
+      .catch(err => console.log(err));
+  })
+})
+
+
+
+
 module.exports = routes;

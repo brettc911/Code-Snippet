@@ -21,7 +21,7 @@ routes.get("/", function(req, res) {
 routes.get("/search", (req, res) => {
   var search = req.query.search
 
-  Code.find({$or: [{tags: search}, {title: search}]})
+  Code.find( { $text: { $search: search } } )
   .then(code => res.render('home', {code: code}))
   .catch(err => console.log(err));
 })

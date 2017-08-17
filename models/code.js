@@ -7,9 +7,10 @@ const Schema = mongoose.Schema;
 
 // create a schema for some code
 const codeSchema = new Schema({
-  title: { type: String, requried: true},
-  tags: { type: String},
-  codeSnippet: { type: String}
+  title: { type: String, requried: true },
+  tags: { type: String },
+  codeSnippet: { type: String },
+  author: { type: String }
 })
 
 codeSchema.plugin(findOrCreate);
